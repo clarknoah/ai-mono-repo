@@ -1,0 +1,75 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    // Language and Environment
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
+    // Modules
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+
+    // Emit
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "removeComments": false,
+    "importHelpers": true,
+    "newLine": "lf",
+
+    // Type Checking
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    "exactOptionalPropertyTypes": false,
+
+    // Completeness
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+
+    // Interop Constraints
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+
+    // Output
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "@iam/auth": ["packages/domains/auth/src/index.ts"],
+      "@iam/project": ["packages/domains/project/src/index.ts"],
+      "@iam/survey": ["packages/domains/survey/src/index.ts"],
+      "@iam/session": ["packages/domains/session/src/index.ts"],
+      "@iam/sequence": ["packages/domains/sequence/src/index.ts"],
+      "@iam/graph": ["packages/platform/graph/src/index.ts"],
+      "@iam/cache": ["packages/platform/cache/src/index.ts"],
+      "@iam/database": ["packages/platform/database/src/index.ts"],
+      "@iam/email": ["packages/platform/email/src/index.ts"],
+      "@iam/object-store": ["packages/platform/object-store/src/index.ts"],
+      "@iam/jobs": ["packages/platform/jobs/src/index.ts"],
+      "@iam/shared-types": ["packages/shared/types/src/index.ts"],
+      "@iam/shared-utils": ["packages/shared/utils/src/index.ts"],
+      "@iam/shared-constants": ["packages/shared/constants/src/index.ts"],
+      "@iam/shared-config": ["packages/shared/config/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp", "dist", "build", ".nx"]
+}

@@ -1,0 +1,47 @@
+{
+  "name": "iam-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI-native monorepo for iAm - spec-driven, type-safe, and optimized for AI agents",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=20.18.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.14.4",
+  "scripts": {
+    "dev": "nx run-many --target=dev --all",
+    "build": "nx run-many --target=build --all",
+    "test": "nx run-many --target=test --all",
+    "test:unit": "nx run-many --target=test:unit --all",
+    "test:integration": "nx run-many --target=test:integration --all",
+    "test:e2e": "nx run-many --target=test:e2e --all",
+    "lint": "nx run-many --target=lint --all",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "nx run-many --target=typecheck --all",
+    "clean": "nx reset && rm -rf node_modules **/node_modules",
+    "graph": "nx graph"
+  },
+  "devDependencies": {
+    "@nx/js": "^20.2.0",
+    "@nx/workspace": "^20.2.0",
+    "@types/node": "^20.17.6",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
+    "eslint": "^9.15.0",
+    "eslint-config-prettier": "^9.1.0",
+    "nx": "^20.2.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "keywords": [
+    "monorepo",
+    "nx",
+    "typescript",
+    "ai-native",
+    "spec-driven",
+    "trpc"
+  ]
+}

@@ -1,0 +1,8 @@
+packages:
+  - 'packages/*'
+  - 'packages/domains/*'
+  - 'packages/platform/*'
+  - 'packages/shared/*'
+  - 'packages/integrations/*'
+  - 'packages/ui/*'
+  - 'runtimes/*'
