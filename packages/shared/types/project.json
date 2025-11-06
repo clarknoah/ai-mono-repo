@@ -1,0 +1,19 @@
+{
+  "name": "@iam/shared-types",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/shared/types/src",
+  "projectType": "library",
+  "tags": ["type:shared", "scope:types"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --noEmit",
+        "cwd": "packages/shared/types"
+      }
+    }
+  }
+}
