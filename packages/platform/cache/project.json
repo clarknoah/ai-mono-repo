@@ -1,0 +1,19 @@
+{
+  "name": "@iam/cache",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/platform/cache/src",
+  "projectType": "library",
+  "tags": ["type:platform", "scope:cache"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --noEmit",
+        "cwd": "packages/platform/cache"
+      }
+    }
+  }
+}
