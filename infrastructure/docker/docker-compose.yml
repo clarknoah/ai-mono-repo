@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: iam-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: iam
+      POSTGRES_PASSWORD: iam_dev_password
+      POSTGRES_DB: iam_dev
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U iam']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache & Queue
+  redis:
+    image: redis:7-alpine
+    container_name: iam-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Neo4j Graph Database
+  neo4j:
+    image: neo4j:5-community
+    container_name: iam-neo4j
+    restart: unless-stopped
+    environment:
+      NEO4J_AUTH: neo4j/iam_dev_password
+      NEO4J_PLUGINS: '["apoc"]'
+      NEO4J_dbms_security_procedures_unrestricted: apoc.*
+    ports:
+      - '7474:7474' # HTTP
+      - '7687:7687' # Bolt
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+    healthcheck:
+      test: ['CMD', 'cypher-shell', '-u', 'neo4j', '-p', 'iam_dev_password', 'RETURN 1']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Commander (Optional - Redis UI)
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: iam-redis-commander
+    restart: unless-stopped
+    environment:
+      REDIS_HOSTS: local:redis:6379
+    ports:
+      - '8081:8081'
+    depends_on:
+      - redis
+    profiles:
+      - tools
+
+volumes:
+  postgres_data:
+    name: iam_postgres_data
+  redis_data:
+    name: iam_redis_data
+  neo4j_data:
+    name: iam_neo4j_data
+  neo4j_logs:
+    name: iam_neo4j_logs
+
+networks:
+  default:
+    name: iam_network
