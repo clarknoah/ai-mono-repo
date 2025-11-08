@@ -1,0 +1,56 @@
+# Cursor AI Rules for iAm Monorepo
+
+## Quick Start
+- Read CLAUDE.md first for complete context and patterns
+- This monorepo follows strict patterns - match them exactly
+- All standards are documented in docs/standards/
+
+## Key Principles
+1. Spec-driven: Read SPEC.md before implementing
+2. Vertical slices: Code organized by domain, not layer
+3. Type safety: Annotate all functions, no 'any'
+4. Consistency: Match existing patterns exactly
+5. Test everything: Unit + integration tests required
+
+## File Naming
+- Services: `userAuthentication.service.ts`
+- Entities: `user.entity.ts`
+- Validators: `loginInput.validator.ts`
+- Procedures: `login.procedure.ts`
+- Tests: `userAuthentication.service.unit.test.ts`
+
+## Standards
+- Read: docs/standards/ROOT-STANDARDS.md
+- For domains: docs/standards/packages/DOMAIN-STANDARDS.md
+- TypeScript: strict mode, always annotate returns
+- Imports: external → internal → relative
+- Errors: Create domain-specific error classes
+
+## Dependencies
+- Domain can use: Platform, Shared
+- Platform can use: Shared
+- Shared can use: Shared
+- Domain → Domain requires approval
+
+## Before Implementing
+1. Check relevant SPEC.md
+2. Review DOMAIN-STANDARDS.md for pattern
+3. Look at one existing example
+4. Match the pattern exactly
+5. Write tests alongside code
+
+## Available Packages
+- @iam/shared-types, @iam/shared-utils, @iam/shared-constants, @iam/shared-config
+- @iam/database (Prisma), @iam/cache (Redis), @iam/jobs (BullMQ)
+
+## Common Commands
+- pnpm test - Run tests
+- pnpm typecheck - Type check all
+- pnpm lint - Lint all
+- pnpm format - Format all
+- pnpm --filter @iam/[package] [command] - Run for specific package
+
+## Remember
+This codebase is designed FOR AI. Trust the structure, follow the patterns, ship quality code.
+
+Full context: CLAUDE.md

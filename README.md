@@ -16,6 +16,12 @@ This monorepo is architected with **AI-native principles**:
 - **Type Safety**: End-to-end type safety from database to UI with zero type assertions
 - **Consistency**: Uniform patterns make AI predictions more accurate
 
+## 🤖 For AI Agents
+
+**If you're an AI agent working on this codebase, start here**: [**CLAUDE.md**](./CLAUDE.md)
+
+This file provides optimal context, quick reference, common patterns, and workflows specifically designed for AI comprehension. It will help you navigate the codebase efficiently and follow the correct patterns.
+
 ## 🚀 Quick Start
 
 ### Prerequisites

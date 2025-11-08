@@ -1,0 +1,143 @@
+# Cline Rules for iAm Monorepo
+
+You are working on an AI-native NX monorepo. **Start by reading CLAUDE.md** for complete context.
+
+## Context Loading (Minimize Tokens)
+
+1. Read CLAUDE.md (this gives you 80% of what you need)
+2. Read relevant SPEC.md from the domain you're working in
+3. Read docs/standards/packages/DOMAIN-STANDARDS.md for patterns
+4. Look at ONE example file
+5. Implement
+
+Do NOT read entire directories or multiple examples. The structure is consistent.
+
+## Core Rules
+
+1. **Follow Existing Patterns Exactly**
+   - Don't invent new patterns
+   - Copy structure from similar files
+   - Use same naming conventions
+
+2. **Type Safety is Required**
+   - Annotate all function parameters and returns
+   - Use strict TypeScript
+   - Never use 'any' (use 'unknown' if truly needed)
+
+3. **Read Specs First**
+   - Every domain has SPEC.md defining its purpose
+   - Read it before making changes
+   - Update it when adding capabilities
+
+4. **Test Everything**
+   - Unit tests for services
+   - Integration tests for procedures
+   - Follow AAA pattern (Arrange, Act, Assert)
+
+5. **Use Proper Logging**
+   - Import from @iam/shared-utils
+   - Log important operations
+   - No console.log in production code
+
+## File Organization
+
+```
+Domain Package Structure:
+packages/domains/[name]/
+├── SPEC.md              # Read this first!
+├── src/
+│   ├── entities/        # Types & interfaces
+│   ├── services/        # Business logic
+│   ├── repositories/    # Data access
+│   ├── procedures/      # tRPC endpoints
+│   ├── validators/      # Zod schemas
+│   └── types/           # Domain types
+└── tests/               # Unit & integration
+```
+
+## Naming Conventions
+
+```typescript
+// ✅ Correct
+userAuthentication.service.ts
+user.entity.ts
+loginInput.validator.ts
+login.procedure.ts
+
+// ❌ Wrong
+authService.ts
+userEntity.ts
+loginVal.ts
+```
+
+## Code Patterns
+
+### Service
+```typescript
+export class MyService {
+  constructor(private readonly repo: MyRepository) {}
+
+  public async doThing(input: Input): Promise<Output> {
+    // Business logic
+  }
+}
+```
+
+### tRPC Procedure
+```typescript
+export const myProcedure = publicProcedure
+  .input(myInputValidator)
+  .output(myOutputSchema)
+  .mutation(async ({ input, ctx }) => {
+    // Call service
+  });
+```
+
+### Validator
+```typescript
+export const myInputValidator = z.object({
+  email: z.string().email(),
+  name: z.string().min(1),
+});
+
+export type MyInput = z.infer<typeof myInputValidator>;
+```
+
+## Dependencies
+
+```
+✅ Domain → Platform
+✅ Domain → Shared
+✅ Platform → Shared
+❌ Domain → Domain (needs approval)
+❌ Any → Runtime
+```
+
+## Verification Before Committing
+
+```bash
+pnpm typecheck  # Must pass
+pnpm lint       # Must pass
+pnpm test       # Must pass
+pnpm build      # Must succeed
+```
+
+## Quick Reference
+
+- Full context: CLAUDE.md
+- Architecture: ARCHITECTURE.md
+- Standards: docs/standards/ROOT-STANDARDS.md
+- Domain patterns: docs/standards/packages/DOMAIN-STANDARDS.md
+- Setup guide: docs/guides/getting-started.md
+
+## Remember
+
+This monorepo is optimized for AI. The structure is your friend. Trust it.
+
+When in doubt:
+1. Check SPEC.md
+2. Check STANDARDS.md
+3. Look at existing examples
+4. Ask user if still unclear
+
+Don't overthink. Follow patterns. Ship code.
